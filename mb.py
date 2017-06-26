@@ -28,7 +28,7 @@ import socket
 # TCP_PORT = 4001
 # TCP_IP = '194.87.99.184'
 TCP_IP = '127.0.0.1'
-TCP_PORT = 14210
+TCP_PORT = 14220
 BUFFER_SIZE = 1024
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

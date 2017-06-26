@@ -2,11 +2,11 @@
 
 """The most basic chat protocol possible.
 
-sudo kill -TERM $(sudo cat chat.pid)
+sudo kill -TERM $(sudo cat mbChat.pid)
 sudo twistd  --python=mbChat.py --pidfile=mbChat.pid --logfile=logs/mbChat.log
 
 """
-port = 14210
+port = 14220
 delayBeforeDropConnection = 180
 
 

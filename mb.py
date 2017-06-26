@@ -33,6 +33,7 @@ BUFFER_SIZE = 1024
 
 for _ in range(8):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(5.0)
     s.connect((TCP_IP, TCP_PORT))
     s.send(getPowerCRC)
     data = s.recv(BUFFER_SIZE)

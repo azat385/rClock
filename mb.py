@@ -43,5 +43,5 @@ print "{}ppm {}°C".format(data[3]/10, data[4]/10)
 
 import memcache
 mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-mc.set("CO2", data[3]/10)
-mc.set("T", data[4]/10.0)
+mc.set("CO2", data[3])
+mc.set("T", data[4])

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from serial import Serial
 from struct import pack, unpack
-
+from time import sleep
 
 hexString = lambda byteString : " ".join(x.encode('hex') for x in byteString)
 
@@ -31,17 +31,20 @@ TCP_IP = '127.0.0.1'
 TCP_PORT = 14220
 BUFFER_SIZE = 1024
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
-s.send(getPowerCRC)
-data = s.recv(BUFFER_SIZE)
-s.close()
-print "write: {}\nread:  {}".format(hexString(getPowerCRC),hexString(data))
+for _ in range(8):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TCP_IP, TCP_PORT))
+    s.send(getPowerCRC)
+    data = s.recv(BUFFER_SIZE)
+    s.close()
+    print "write: {}\nread:  {}".format(hexString(getPowerCRC),hexString(data))
 
-data = unpack(">BBBHHBB", data)
-print "{}ppm {}°C".format(data[3]/10, data[4]/10)
+    data = unpack(">BBBHHBB", data)
+    print "{}ppm {}°C".format(data[3]/10, data[4]/10)
 
-import memcache
-mc = memcache.Client(['127.0.0.1:11211'], debug=0)
-mc.set("CO2", data[3])
-mc.set("T", data[4])
+    import memcache
+    mc = memcache.Client(['127.0.0.1:11211'], debug=0)
+    mc.set("CO2", data[3])
+    mc.set("T", data[4])
+
+    sleep(5)

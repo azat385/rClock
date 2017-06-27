@@ -30,15 +30,19 @@ getPowerCRC = "\x10\x03\x01\x00\x00\x02\xC6\xB6"
 
 
 def getMB():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((TCP_IP, TCP_PORT))
-    s.send(getPowerCRC)
-    data = s.recv(BUFFER_SIZE)
-    s.close()
-    # print "write: {}\nread:  {}".format(hexString(getPowerCRC), hexString(data))
-    data = unpack(">BBBHHBB", data)
-    # print data[3:5]
-    return "CO2: {}ppm  T: {}°C".format(data[3]/10, data[4]/10.0)
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((TCP_IP, TCP_PORT))
+        s.send(getPowerCRC)
+        data = s.recv(BUFFER_SIZE)
+        s.close()
+        # print "write: {}\nread:  {}".format(hexString(getPowerCRC), hexString(data))
+        data = unpack(">BBBHHBB", data)
+        # print data[3:5]
+        CO2, T = data[3]/10, data[4]/10.0
+    except:
+        CO2, T = "Nan"*2
+    return "CO2: {}ppm  T: {}°C".format(CO2, T)
 
 
 class DataLabel(Label):

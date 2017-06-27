@@ -85,3 +85,5 @@ if __name__ == '__main__':
     # create_tables()
     # add_init_data()
     check_if_data_table_exists()
+    # print session.query(Data).order_by(Data.id.desc()).first()
+    # print session.query(Data).order_by(Data.id.desc()).all()[:2]

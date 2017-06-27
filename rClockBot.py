@@ -5,11 +5,11 @@ mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 
 import humanize
 from datetime import datetime
-_t = humanize.i18n.activate('ru_RU')
 
 def get_data_from_mc():
     data = ["CO2", "T", "ts"]
     value = mc.get_multi(data)
+    _t = humanize.i18n.activate('ru_RU')
     return "{}({})\nCO2: {}ppm\nT: {}°C".format(humanize.naturaltime(datetime.now() - value['ts']),
                                             value['ts'],
                                             value['CO2']/10,

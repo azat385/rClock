@@ -7,8 +7,8 @@ def get_data_from_mc():
     data = ["CO2", "T", "ts"]
     value = mc.get_multi(data)
     return "{}\nCO2: {}ppm\nT: {}°C".format(value['ts'],
-                                            value['CO2'],
-                                            value['T'],
+                                            value['CO2']/10,
+                                            value['T']/10.0,
                                             )
 
 from telegram.ext import Updater, CommandHandler

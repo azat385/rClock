@@ -4,6 +4,8 @@ from struct import pack, unpack
 from time import sleep
 from datetime import datetime
 
+from sql_create_table import Data, session, check_if_data_table_exists
+
 hexString = lambda byteString : " ".join(x.encode('hex') for x in byteString)
 
 # ser = Serial(
@@ -35,6 +37,8 @@ BUFFER_SIZE = 1024
 import memcache
 mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 
+check_if_data_table_exists()
+
 for _ in range(8):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(5.0)
@@ -51,5 +55,9 @@ for _ in range(8):
     mc.set("CO2", data[3])
     mc.set("T", data[4])
     mc.set("ts", ts)
+
+    session.add(Data(id=1, value=data[3] / 10, stime=ts))
+    session.add(Data(id=2, value=data[4] / 10.0, stime=ts))
+    session.commit()
 
     sleep(5)

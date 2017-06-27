@@ -19,8 +19,11 @@ from struct import unpack
 
 hexString = lambda byteString : " ".join(x.encode('hex') for x in byteString)
 
-TCP_IP = '192.168.155.11'
-TCP_PORT = 4001
+# TCP_IP = '192.168.155.11'
+# TCP_PORT = 4001
+TCP_IP = '194.87.99.184'
+TCP_PORT = 14230
+
 BUFFER_SIZE = 1024
 
 getPowerCRC = "\x10\x03\x01\x00\x00\x02\xC6\xB6"
@@ -41,8 +44,7 @@ def getMB():
 class DataLabel(Label):
     def update(self, *args):
         self.text = getMB()
-        self.font_size = 15
-        # self.color = (1, 0, 0, 1)
+        self.font_size = 75
 
 kv = '''
 #:import math math
@@ -99,8 +101,7 @@ Builder.load_string(kv)
 class MyClockWidget(FloatLayout):
     pass
 
-
-k = 1.15
+k=1.15
 
 class Ticks(Widget):
     def __init__(self, **kwargs):
@@ -112,13 +113,13 @@ class Ticks(Widget):
         self.canvas.clear()
         with self.canvas:
             time = datetime.datetime.now()
-            Color(1.0, 1.0, 1.0)
-            Line(points=[self.center_x, self.center_y*k, self.center_x+0.8*self.r*sin(pi/30*time.second), self.center_y*k+0.8*self.r*cos(pi/30*time.second)], width=2, cap="round")
-            Color(1.0, 1.0, 1.0)
-            Line(points=[self.center_x, self.center_y*k, self.center_x+0.7*self.r*sin(pi/30*time.minute), self.center_y*k+0.7*self.r*cos(pi/30*time.minute)], width=3, cap="round")
-            Color(1.0, 1.0, 1.0)
+            Color(0.2, 0.5, 0.2)
+            Line(points=[self.center_x, self.center_y*k, self.center_x+0.8*self.r*sin(pi/30*time.second), self.center_y*k+0.8*self.r*cos(pi/30*time.second)], width=3, cap="round")
+            Color(0.3, 0.6, 0.3)
+            Line(points=[self.center_x, self.center_y*k, self.center_x+0.7*self.r*sin(pi/30*time.minute), self.center_y*k+0.7*self.r*cos(pi/30*time.minute)], width=4, cap="round")
+            Color(0.4, 0.7, 0.4)
             th = time.hour*60 + time.minute
-            Line(points=[self.center_x, self.center_y*k, self.center_x+0.5*self.r*sin(pi/360*th), self.center_y*k+0.5*self.r*cos(pi/360*th)], width=4, cap="round")
+            Line(points=[self.center_x, self.center_y*k, self.center_x+0.5*self.r*sin(pi/360*th), self.center_y*k+0.5*self.r*cos(pi/360*th)], width=5, cap="round")
 
 class MyClockApp(App):
     def build(self):
@@ -129,7 +130,7 @@ class MyClockApp(App):
 
         root = BoxLayout(orientation='vertical')
         root.add_widget(clock)
-        layout = BoxLayout(size_hint=(1, None), height=d.height)
+        layout = BoxLayout(size_hint=(1, None), height=70)
         layout.add_widget(d)
         root.add_widget(layout)
         return root
@@ -137,3 +138,4 @@ class MyClockApp(App):
 
 if __name__ == '__main__':
     MyClockApp().run()
+

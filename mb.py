@@ -56,8 +56,8 @@ for _ in range(8):
     mc.set("T", data[4])
     mc.set("ts", ts)
 
-    session.add(Data(id=1, value=data[3] / 10, stime=ts))
-    session.add(Data(id=2, value=data[4] / 10.0, stime=ts))
+    session.add(Data(tag_id=1, value=data[3] / 10, stime=ts))
+    session.add(Data(tag_id=2, value=data[4] / 10.0, stime=ts))
     session.commit()
 
     sleep(5)

@@ -15,8 +15,8 @@ from telegram.ext import Updater, CommandHandler
 def figure(bot, update):
     photo_name = 'pics/{}.jpg'.format(datetime.now().isoformat())
     camera.capture(photo_name)
-    bot.send_photo(chat_id=update.message.chat_id, photo=open(photo_name, 'rb'))
-    # update.message.reply_text('Hello World!')
+    # bot.send_photo(chat_id=update.message.chat_id, photo=open(photo_name, 'rb'))
+    update.message.reply_photo(photo=open(photo_name, 'rb'))
 
 
 def start(bot, update):

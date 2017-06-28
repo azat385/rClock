@@ -13,7 +13,7 @@ from telegram.ext import Updater, CommandHandler
 
 
 def figure(bot, update):
-    photo_name = '{}.jpg'.format(datetime.now().isoformat())
+    photo_name = 'pics/{}.jpg'.format(datetime.now().isoformat())
     camera.capture(photo_name)
     bot.send_photo(chat_id=update.message.chat_id, photo=open(photo_name, 'rb'))
     # update.message.reply_text('Hello World!')

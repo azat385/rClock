@@ -2,6 +2,9 @@
 
 import picamera
 
+camera = picamera.PiCamera()
+camera.vflip = True
+
 import humanize
 from datetime import datetime, timedelta
 
@@ -10,8 +13,6 @@ from telegram.ext import Updater, CommandHandler
 
 
 def figure(bot, update):
-    camera = picamera.PiCamera()
-    camera.vflip = True
     photo_name = '{}.jpg'.format(datetime.now().isoformat())
     camera.capture(photo_name)
     bot.send_photo(chat_id=update.message.chat_id, photo=open(photo_name, 'rb'))

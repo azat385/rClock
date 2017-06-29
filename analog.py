@@ -41,7 +41,7 @@ def getMB():
         # print data[3:5]
         CO2, T = data[3]/10, data[4]/10.0
     except:
-        CO2, T = "Nan"*2
+        CO2, T = "Nan", "Nan"
     return "CO2: {}ppm  T: {}°C".format(CO2, T)
 
 

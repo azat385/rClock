@@ -32,8 +32,9 @@ getPowerCRC = "\x10\x03\x01\x00\x00\x02\xC6\xB6"
 def getMB():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(5.0)
         s.connect((TCP_IP, TCP_PORT))
-        s.settimeout(5)
+        s.settimeout(5.0)
         s.send(getPowerCRC)
         data = s.recv(BUFFER_SIZE)
         s.close()
